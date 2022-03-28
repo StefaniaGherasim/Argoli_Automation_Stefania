@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Argoli_Automation_Stefania", "Argoli_Automation_Stefania\Argoli_Automation_Stefania.csproj", "{76749331-130D-4674-AC96-394EB8AB6BA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76749331-130D-4674-AC96-394EB8AB6BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76749331-130D-4674-AC96-394EB8AB6BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76749331-130D-4674-AC96-394EB8AB6BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76749331-130D-4674-AC96-394EB8AB6BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C286B38-4B52-4444-B05E-E4D72C4861AC}
+	EndGlobalSection
+EndGlobal
