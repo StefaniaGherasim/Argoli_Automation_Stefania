@@ -26,15 +26,16 @@ namespace Argoli_Automation_Stefania.Tests
         protected static string registrationUrlPath = "register";
 
         [OneTimeSetUp]
-        protected void ExtentStart()
+        protected static void ExtentStart()
         {
-            var path = System.Reflection.Assembly.GetCallingAssembly().CodeBase; // path to the tests that are running
+            var path = System.Reflection.Assembly.GetCallingAssembly().CodeBase; // path to location to the tests that are running
             var actualPath = path.Substring(0, path.LastIndexOf("bin"));// get bin folder
             var projectPath = new Uri(actualPath).LocalPath;
             Directory.CreateDirectory(projectPath.ToString() + "Reports");
             DateTime time = DateTime.Now;
             var reportPath = projectPath + "Reports\\report_" + time.ToString("h_mm_ss") + ".html";
-            var htmlReporter = new ExtentHtmlReporter(reportPath);
+            var htmlReporter = new ExtentV3HtmlReporter(reportPath);
+            //var htmlReporter = new ExtentHtmlReporter(reportPath);
             _extent = new ExtentReports();// obiectul unde vom salva toate informatiile despre teste
             _extent.AttachReporter(htmlReporter);
             _extent.AddSystemInfo("Host Name", Environment.MachineName);
