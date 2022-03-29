@@ -38,6 +38,8 @@ namespace Argoli_Automation_Stefania.Tests.Register
             Thread.Sleep(1000);
             Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
             rp.CloseErr();
+
+            rp.RegisterUser("ssss", "ssss", "sss@sss.com", "012345", "ssss");
         }
     }
 }
