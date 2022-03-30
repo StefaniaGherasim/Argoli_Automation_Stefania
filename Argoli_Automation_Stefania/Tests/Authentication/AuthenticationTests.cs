@@ -64,6 +64,21 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
         }
         
 
+        [Test, Order (6)]
+        public void ForgotPassword()
+        {
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
+            _driver.Navigate().GoToUrl(url);
+            MainPage mp = new MainPage(_driver);
+            mp.MoveToLoginPage();
+
+            LoginPage lp = new LoginPage(_driver);
+            lp.PushForgotPassword();
+            //Thread.Sleep(100);// ruleaza prea repede --pentru a vedea functionalitatea butonului si pentru a vedea noua pagina deschisa
+
+        }
+
 
 
     }

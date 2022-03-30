@@ -28,6 +28,12 @@ namespace Argoli_Automation_Stefania.PageModels
 
         }
 
+        public void PushForgotPassword()
+        {
+            var forgotPasswordButton = driver.FindElement(By.CssSelector(forgotPasswordSelector));
+            forgotPasswordButton.Click();
+        }
+
         public string CheckPage()//verificam daca suntem pe pagina
         {
             return driver.FindElement(By.CssSelector(checkPageSelector)).Text;

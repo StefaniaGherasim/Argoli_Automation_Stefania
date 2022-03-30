@@ -108,6 +108,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
             Assert.AreEqual("Adresa de mail este deja înregistrată", rp.ErrmessagealreadyexistuserLabel());
             rp.CloseErr2();
             rp.PushBackToLoginPage();
+            Assert.AreEqual("Nu ai încă cont?", lp.CheckPage());//verifica ca suntem pe pagina de login
         }
 
 
