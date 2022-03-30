@@ -1,4 +1,5 @@
 ﻿using Argoli_Automation_Stefania.PageModels;
+using Argoli_Automation_Stefania.Utilities;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,10 @@ namespace Argoli_Automation_Stefania.PageModels
 
         public void MoveToLoginPage()
         {
+           
             driver.FindElement(By.XPath(contulMeuSelector)).Click();
+         
+
         }
     }
 }

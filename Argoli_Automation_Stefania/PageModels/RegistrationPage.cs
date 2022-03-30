@@ -84,7 +84,7 @@ namespace Argoli_Automation_Stefania.PageModels
             closeerrmessageButtonErr.Click();
         }
 
-        public void RegisterUser(string Nume, string Prenume, string Email, string Telefon, string Parola)
+        public void RegisterUser (string Nume, string Prenume, string Email, string Telefon, string Parola)
         {
             var nameInput = driver.FindElement(By.Id(nameInputSelector));
             nameInput.Clear();

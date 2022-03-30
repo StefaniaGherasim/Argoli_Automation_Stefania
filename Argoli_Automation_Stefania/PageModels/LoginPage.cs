@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Argoli_Automation_Stefania.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,6 +30,8 @@ namespace Argoli_Automation_Stefania.PageModels
 
         public string CheckPage()//verificam daca suntem pe pagina
         {
+            var select = Utils.WaitForElementClickable(driver, 10, (By.CssSelector(checkPageSelector)));
+            select.Click();
             return driver.FindElement(By.CssSelector(checkPageSelector)).Text;
            //return String.Equals(label.ToLower(), driver.FindElement(By.XPath(checkPageSelector)).Text.ToLower());
         }
@@ -52,12 +55,18 @@ namespace Argoli_Automation_Stefania.PageModels
             passwordInput.SendKeys(password);
             var loginButton = driver.FindElement(By.CssSelector(loginButtonSelector));
             loginButton.Submit();
+            var select = Utils.WaitForElementClickable(driver, 10, (By.Id(errorIdmsgSelector)));
+            select.Click();
+
         }
 
         public void MoveToCreareCont()
         {
+            
             driver.FindElement(By.CssSelector(creazaContSelector)).Click();
+           
         }
+
 
     }
 }
