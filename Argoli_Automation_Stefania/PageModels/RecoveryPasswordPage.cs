@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Argoli_Automation_Stefania.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Argoli_Automation_Stefania.PageModels
         const string errMessageLabelSelector = "#messageArea > h5";//css
         const string errMsg2LabelSelector = "#messageArea > h5:nth-child(1)";//css
         const string trimiteButtonSelector = "body > div.recovery > div > div.col-md-4 > button";//css
-        const string mesajSuccesLabel = "#messageArea > h5:nth-child(1)";//css
+        const string mesajSuccesLabelSelector = "#messageArea > h5:nth-child(1)";//css
 
         public RecoveryPasswordPage(IWebDriver driver) : base(driver)
         {
@@ -41,13 +42,22 @@ namespace Argoli_Automation_Stefania.PageModels
 
         public string SuccesMessageLabel()
         {
-            return driver.FindElement(By.CssSelector(mesajSuccesLabel)).Text;
+            return driver.FindElement(By.CssSelector(mesajSuccesLabelSelector)).Text;
         }
 
         public void TrimiteButton()
         {
             var trimiteButton = driver.FindElement(By.CssSelector(trimiteButtonSelector));
             trimiteButton.Click();
-         }
+            var select = Utils.WaitForElementClickable(driver, 10, (By.CssSelector(errMsg2LabelSelector)));
+            select.Click();
+        }
+
+        public void EmailRecoveryPassword(string email)
+        {
+            var emailInput = driver.FindElement(By.Id(emailInputSelector));
+            emailInput.Clear();
+            emailInput.SendKeys(email);
+        }
     }
 }
