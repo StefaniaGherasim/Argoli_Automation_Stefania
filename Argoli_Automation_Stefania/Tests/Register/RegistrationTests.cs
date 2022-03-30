@@ -12,7 +12,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
     {
         string url = FrameworkConstants.GetUrl();
 
-        private static IEnumerable<TestCaseData> GetCredentialsDataCsv2()
+        private static IEnumerable<TestCaseData> GetCredentialsDataCsv1()
         {
             foreach (var values in Utils.GetGenericData("TestData\\RegistrationData.csv"))
             {
@@ -20,8 +20,34 @@ namespace Argoli_Automation_Stefania.Tests.Register
             }
         }
 
-        [Test, Order(3), TestCaseSource("GetCredentialsDataCsv2")]
-        public void RegisterTestPovitiv(string Nume, string Prenume, string Email, string Telefon, string Parola)
+        [Test, Order(2), TestCaseSource("GetCredentialsDataCsv1")]
+        public void RegisterTest(string nume, string prenume, string email, string telefon, string parola)// (modifica csv -creaza cont nou)
+        {
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
+            _driver.Navigate().GoToUrl(url);
+            MainPage mp = new MainPage(_driver);
+            mp.MoveToLoginPage();
+            LoginPage lp = new LoginPage(_driver);
+            lp.MoveToCreareCont();
+
+            RegistrationPage rp = new RegistrationPage(_driver);
+            Assert.AreEqual("Creează cont", rp.CreazaContLabel());
+            Assert.AreEqual("completează datele contului", rp.CompleteazaLabel());
+            Assert.AreEqual("Name:", rp.CheckNameLabel());
+            Assert.AreEqual("Prenume:", rp.CheckprenumeLabel());
+            Assert.AreEqual("Email:", rp.CheckemailLabel());
+            Assert.AreEqual("Telefon:", rp.ChecktelLabel());
+            Assert.AreEqual("Parola:", rp.CheckparolaLabel());
+            Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
+           
+            rp.PushInregistrare();
+            rp.RegisterUser(nume, prenume, email, telefon, parola);
+
+        }
+
+        [Test, Order(4)]
+        public void RegisterTestWithoutData()
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -41,11 +67,12 @@ namespace Argoli_Automation_Stefania.Tests.Register
             Assert.AreEqual("Parola:", rp.CheckparolaLabel());
             Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
 
-            rp.RegisterUser(Nume, Prenume, Email, Telefon, Parola);
             rp.PushInregistrare();
-           /* Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
-            rp.CloseErr();*/
-            
+            Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
+            rp.CloseErr();
         }
+
+
+
     }
 }

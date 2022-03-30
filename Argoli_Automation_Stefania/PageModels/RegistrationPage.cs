@@ -87,31 +87,31 @@ namespace Argoli_Automation_Stefania.PageModels
             closeerrmessageButtonErr.Click();
         }
 
-        public void RegisterUser (string Nume, string Prenume, string Email, string Telefon, string Parola)
+        public void RegisterUser (string nume, string prenume, string email, string telefon, string parola)
         {
             var nameInput = driver.FindElement(By.Id(nameInputSelector));
             nameInput.Clear();
-            nameInput.SendKeys(Nume);
+            nameInput.SendKeys(nume);
 
             var prenumeInput = driver.FindElement(By.Id(prenumeInputSelector));
             prenumeInput.Clear();
-            prenumeInput.SendKeys(Prenume);
+            prenumeInput.SendKeys(prenume);
 
             var emailInput = driver.FindElement(By.Id(emailInputSelector));
             emailInput.Clear();
-            emailInput.SendKeys(Email);
+            emailInput.SendKeys(email);
 
             var telefonInput = driver.FindElement(By.Id(telInputSelector));
             telefonInput.Clear();
-            telefonInput.SendKeys(Telefon);
+            telefonInput.SendKeys(telefon);
 
             var parolaInput = driver.FindElement(By.Id(parolaInputSelector));
             parolaInput.Clear();
-            parolaInput.SendKeys(Parola);
+            parolaInput.SendKeys(parola);
 
             var confirmaparolaInput = driver.FindElement(By.Id(confirmaparolaInputSelector));
             confirmaparolaInput.Clear();
-            confirmaparolaInput.SendKeys(Parola);
+            confirmaparolaInput.SendKeys(parola);
 
             var inregistrareButton = driver.FindElement(By.CssSelector(inregistrareButtonSelector));
             inregistrareButton.Click();

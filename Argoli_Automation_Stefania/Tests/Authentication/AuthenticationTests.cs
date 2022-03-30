@@ -51,7 +51,7 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
             }
         }
 
-        [Test, Order(2),TestCaseSource("GetCredentialsDataCsv2")]
+        [Test, Order(3),TestCaseSource("GetCredentialsDataCsv2")]
         public void AuthenticationPositive(string email, string password)
         {
             testName = TestContext.CurrentContext.Test.Name;
