@@ -27,6 +27,7 @@ namespace Argoli_Automation_Stefania.PageModels
         const string closeerrmessageButtonSelector = "#msjEroare > div > button";//css
         const string closeerrmessageButtonSelector2 = "#msjEroare > div > button";//css
         const string errmessagealreadyexistuserSelector = "#msjEroare > div > span";//css
+        const string goBackToLoginPageButtonSelector = "#signForm > div.text-left.mb-3 > button"; // css
 
 
         public RegistrationPage(IWebDriver driver) : base(driver)
@@ -97,6 +98,12 @@ namespace Argoli_Automation_Stefania.PageModels
         {
             var closeerrmessageButtonErr2 = driver.FindElement(By.CssSelector(closeerrmessageButtonSelector2));
             closeerrmessageButtonErr2.Click();
+        }
+
+        public void PushBackToLoginPage()
+        {
+            var backTOLoginPageButton = driver.FindElement(By.CssSelector(goBackToLoginPageButtonSelector));
+            backTOLoginPageButton.Click();
         }
 
         public void RegisterUser (string nume, string prenume, string email, string telefon, string parola)

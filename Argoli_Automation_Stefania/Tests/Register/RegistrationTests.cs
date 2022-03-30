@@ -68,7 +68,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
             Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
 
             rp.PushInregistrare();
-            Thread.Sleep(100);
+            //Thread.Sleep(100);
             Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
             rp.CloseErr();
         }
@@ -107,6 +107,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
             rp.PushInregistrare();
             Assert.AreEqual("Adresa de mail este deja înregistrată", rp.ErrmessagealreadyexistuserLabel());
             rp.CloseErr2();
+            rp.PushBackToLoginPage();
         }
 
 
