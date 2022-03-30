@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Argoli_Automation_Stefania.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -76,6 +77,8 @@ namespace Argoli_Automation_Stefania.PageModels
         {
             var inregistrareButtonErr = driver.FindElement(By.CssSelector(inregistrareButtonSelector));
             inregistrareButtonErr.Click();
+            var select = Utils.WaitForElementClickable(driver, 10, (By.CssSelector(errmessagenullinregLabelSelector)));
+            select.Click();
         }
 
         public void CloseErr()

@@ -20,7 +20,6 @@ namespace Argoli_Automation_Stefania.Tests.Register
             _driver.Navigate().GoToUrl(url);
             MainPage mp = new MainPage(_driver);
             mp.MoveToLoginPage();
-            Thread.Sleep(1000);
             LoginPage lp = new LoginPage(_driver);
             lp.MoveToCreareCont();
 
@@ -35,7 +34,6 @@ namespace Argoli_Automation_Stefania.Tests.Register
             Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
 
             rp.PushInregistrare();
-            Thread.Sleep(1000);
             Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
             rp.CloseErr();
 

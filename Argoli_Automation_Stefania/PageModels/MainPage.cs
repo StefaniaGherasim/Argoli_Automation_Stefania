@@ -12,6 +12,8 @@ namespace Argoli_Automation_Stefania.PageModels
         
     {
         const string contulMeuSelector = "//*[@id='navbar-navigation']/ul[2]/li[3]/a"; // xpath (togle ????)
+        const string checkPageSelector = "#loginForm > div.form-group.text-center.text-muted.content-divider";//css
+
         public MainPage(IWebDriver driver) : base(driver)//constructior pentru MainPage driver
         {
 
@@ -21,8 +23,8 @@ namespace Argoli_Automation_Stefania.PageModels
         {
            
             driver.FindElement(By.XPath(contulMeuSelector)).Click();
-         
-
+            var select = Utils.WaitForElementClickable(driver, 10, (By.CssSelector(checkPageSelector)));
+            select.Click();
         }
     }
 }
