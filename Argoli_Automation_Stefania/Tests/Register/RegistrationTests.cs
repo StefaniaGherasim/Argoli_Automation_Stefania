@@ -68,8 +68,45 @@ namespace Argoli_Automation_Stefania.Tests.Register
             Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
 
             rp.PushInregistrare();
+            Thread.Sleep(100);
             Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
             rp.CloseErr();
+        }
+
+        private static IEnumerable<TestCaseData> GetCredentialsDataCsvAlreadyExist()
+        {
+            foreach (var values in Utils.GetGenericData("TestData\\AlreadyExistRegisterData.csv"))
+            {
+                yield return new TestCaseData(values);
+            }
+        }
+
+        [Test, Order(5), TestCaseSource("GetCredentialsDataCsvAlreadyExist")]
+        public void RegisterTestWithOlreadyRegisteredUser(string nume, string prenume, string email, string telefon, string parola)
+        {
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
+            _driver.Navigate().GoToUrl(url);
+            MainPage mp = new MainPage(_driver);
+            mp.MoveToLoginPage();
+            LoginPage lp = new LoginPage(_driver);
+            lp.MoveToCreareCont();
+
+            RegistrationPage rp = new RegistrationPage(_driver);
+            Assert.AreEqual("Creează cont", rp.CreazaContLabel());
+            Assert.AreEqual("completează datele contului", rp.CompleteazaLabel());
+            Assert.AreEqual("Name:", rp.CheckNameLabel());
+            Assert.AreEqual("Prenume:", rp.CheckprenumeLabel());
+            Assert.AreEqual("Email:", rp.CheckemailLabel());
+            Assert.AreEqual("Telefon:", rp.ChecktelLabel());
+            Assert.AreEqual("Parola:", rp.CheckparolaLabel());
+            Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
+
+            
+            rp.RegisterUser(nume, prenume, email, telefon, parola);
+            rp.PushInregistrare();
+            Assert.AreEqual("Adresa de mail este deja înregistrată", rp.ErrmessagealreadyexistuserLabel());
+            rp.CloseErr2();
         }
 
 

@@ -60,10 +60,7 @@ namespace Argoli_Automation_Stefania.PageModels
 
         public void MoveToCreareCont()
         {
-            
             driver.FindElement(By.CssSelector(creazaContSelector)).Click();
-
-           
         }
 
 
