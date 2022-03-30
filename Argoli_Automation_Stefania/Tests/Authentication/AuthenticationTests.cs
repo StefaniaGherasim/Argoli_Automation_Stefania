@@ -12,6 +12,37 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
     public class AuthenticationTests : BaseTest
     {
         string url = FrameworkConstants.GetUrl();
+
+        private static IEnumerable<TestCaseData> GetCredentialsDataCsv3()
+        {
+            foreach (var values in Utils.GetGenericData("TestData\\Authenticationdatan.csv"))
+            {
+                yield return new TestCaseData(values);
+            }
+        }
+
+
+        [Test, Order(1), TestCaseSource("GetCredentialsDataCsv3")]
+        public void AuthenticationNegativ(string email, string password)
+        {
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
+            _driver.Navigate().GoToUrl(url);
+            MainPage mp = new MainPage(_driver);
+            mp.MoveToLoginPage();
+
+            LoginPage lp = new LoginPage(_driver);
+
+
+            Assert.AreEqual("Nu ai încă cont?", lp.CheckPage());
+            Assert.AreEqual("By continuing, you're confirming that you've read our Terms & Conditions and Cookie Policy", lp.CheckPage2());
+
+            lp.Login(email, password);
+            Assert.AreEqual("email sau parolă incorectă", lp.CheckErrorMessage());
+
+        }
+
+
         private static IEnumerable<TestCaseData> GetCredentialsDataCsv2()
         {
             foreach (var values in Utils.GetGenericData("TestData\\AuthenticationData.csv"))
@@ -20,7 +51,7 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
             }
         }
 
-        [Test, TestCaseSource("GetCredentialsDataCsv2")]
+        [Test, Order(2),TestCaseSource("GetCredentialsDataCsv2")]
         public void AuthenticationPositive(string email, string password)
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -30,12 +61,8 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
             mp.MoveToLoginPage();
 
             LoginPage lp = new LoginPage(_driver);
-            Assert.AreEqual("Nu ai încă cont?", lp.CheckPage());
-            Assert.AreEqual("By continuing, you're confirming that you've read our Terms & Conditions and Cookie Policy", lp.CheckPage2());
-           
-            lp.Login(email, password);
-            Assert.AreEqual("email sau parolă incorectă", lp.CheckErrorMessage());
         }
+        
 
 
 

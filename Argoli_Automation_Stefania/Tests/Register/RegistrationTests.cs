@@ -14,14 +14,14 @@ namespace Argoli_Automation_Stefania.Tests.Register
 
         private static IEnumerable<TestCaseData> GetCredentialsDataCsv2()
         {
-            foreach (var values in Utils.GetGenericData("TestData\\Credentials.csv"))
+            foreach (var values in Utils.GetGenericData("TestData\\RegistrationData.csv"))
             {
                 yield return new TestCaseData(values);
             }
         }
 
-        [Test]
-        public void RegisterTest()
+        [Test, Order(3), TestCaseSource("GetCredentialsDataCsv2")]
+        public void RegisterTestPovitiv(string Nume, string Prenume, string Email, string Telefon, string Parola)
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -41,11 +41,11 @@ namespace Argoli_Automation_Stefania.Tests.Register
             Assert.AreEqual("Parola:", rp.CheckparolaLabel());
             Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
 
+            rp.RegisterUser(Nume, Prenume, Email, Telefon, Parola);
             rp.PushInregistrare();
-            Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
-            rp.CloseErr();
-
-            rp.RegisterUser("ssss", "ssss", "sss@sss.com", "012345", "ssssss");
+           /* Assert.AreEqual("Parola trebuie sa conțină între 6-20 de caractere", rp.CheckerrmessagenullinregLabel());
+            rp.CloseErr();*/
+            
         }
     }
 }
