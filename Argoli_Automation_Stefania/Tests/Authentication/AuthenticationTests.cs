@@ -12,9 +12,16 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
     public class AuthenticationTests : BaseTest
     {
         string url = FrameworkConstants.GetUrl();
+        private static IEnumerable<TestCaseData> GetCredentialsDataCsv2()
+        {
+            foreach (var values in Utils.GetGenericData("TestData\\AuthenticationData.csv"))
+            {
+                yield return new TestCaseData(values);
+            }
+        }
 
-        [Test]
-        public void AuthenticationPositive()
+        [Test, TestCaseSource("GetCredentialsDataCsv2")]
+        public void AuthenticationPositive(string email, string password)
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -26,7 +33,7 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
             Assert.AreEqual("Nu ai încă cont?", lp.CheckPage());
             Assert.AreEqual("By continuing, you're confirming that you've read our Terms & Conditions and Cookie Policy", lp.CheckPage2());
            
-            lp.Login("sss@ddd.com", "pass");
+            lp.Login(email, password);
             Assert.AreEqual("email sau parolă incorectă", lp.CheckErrorMessage());
         }
 

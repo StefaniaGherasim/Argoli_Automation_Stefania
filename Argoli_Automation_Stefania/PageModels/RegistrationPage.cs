@@ -113,6 +113,9 @@ namespace Argoli_Automation_Stefania.PageModels
             confirmaparolaInput.Clear();
             confirmaparolaInput.SendKeys(Parola);
 
+            var inregistrareButton = driver.FindElement(By.CssSelector(inregistrareButtonSelector));
+            inregistrareButton.Click();
+
 
         }
     }
