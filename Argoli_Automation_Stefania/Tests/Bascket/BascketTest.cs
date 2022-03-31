@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace Argoli_Automation_Stefania.Tests.CartAdd
+namespace Argoli_Automation_Stefania.Tests.Bascket
 {
-    public class CartAddTest : BaseTest
+    class BascketTest : BaseTest
     {
 
         string url = FrameworkConstants.GetUrl();
@@ -21,8 +21,8 @@ namespace Argoli_Automation_Stefania.Tests.CartAdd
             }
         }
 
-        [Test, Order(11), TestCaseSource("GetCredentialsDataCsv2")]
-        public void AddToCardTest(string email, string password)
+        [Test, Order(12), TestCaseSource("GetCredentialsDataCsv2")]
+        public void RemoveFromBascketTest(string email, string password)
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -35,12 +35,14 @@ namespace Argoli_Automation_Stefania.Tests.CartAdd
 
             CartAddPage cp = new CartAddPage(_driver);
             Assert.AreEqual("Produse recent adăugate", cp.CheckProduseAdaugateLabel());
-            //cp.CheckProduseAdaugateLabel("Produse recent adăugate");//(inlocuim cu assert)
-            // Assert.IsTrue(cp.CheckProduseAdaugateLabel("Produse recent adăugate"));
             cp.AdaugaInCos();
             cp.MoveToBascket();
             Assert.AreEqual("Coșul dumneavoastră de cumpărături", cp.CheckBascketPageLabel());
-            Thread.Sleep(3000);// verificare cos
+            //Thread.Sleep(3000);
+            BascketPage bp = new BascketPage(_driver);
+            Assert.AreEqual("Coșul dumneavoastră de cumpărături", cp.CheckBascketPageLabel());
+            bp.DeletProduct();
+            Assert.AreEqual("Cost total: 0 LEI", bp.TotalCost());
 
         }
 
