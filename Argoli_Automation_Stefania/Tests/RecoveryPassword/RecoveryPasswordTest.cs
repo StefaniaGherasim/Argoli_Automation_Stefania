@@ -12,7 +12,7 @@ namespace Argoli_Automation_Stefania.Tests.RecoveryPassword
     {
         string url = FrameworkConstants.GetUrl() + "/recovery";
 
-        [Test]
+        [Test, Order(3)]
         public void RecoverPasswordWithoutData()
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -34,7 +34,7 @@ namespace Argoli_Automation_Stefania.Tests.RecoveryPassword
             }
         }
 
-        [Test, TestCaseSource("GetCredentialsDataCsvWrongEmail")]
+        [Test, Order(4), TestCaseSource("GetCredentialsDataCsvWrongEmail")]
         public void RecoverPasswordWIthWrongData(string email)
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -57,7 +57,7 @@ namespace Argoli_Automation_Stefania.Tests.RecoveryPassword
         }
 
 
-        [Test, TestCaseSource("GetCredentialsDataCsvEmail")]
+        [Test, Order(5), TestCaseSource("GetCredentialsDataCsvEmail")]
         public void RecoverPasswordEmail(string email)
         {
             testName = TestContext.CurrentContext.Test.Name;

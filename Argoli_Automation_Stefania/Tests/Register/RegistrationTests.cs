@@ -20,7 +20,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
             }
         }
 
-        [Test,TestCaseSource("GetCredentialsDataCsv1")] //inregistrare pozitiva cu date din CSV
+        [Test, Order(6),TestCaseSource("GetCredentialsDataCsv1")] //inregistrare pozitiva cu date din CSV
         public void RegisterTest(string nume, string prenume, string email, string telefon, string parola)// (modifica csv -creaza cont nou)
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -46,7 +46,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
 
         }
 
-        [Test]
+        [Test, Order(7)]
         public void RegisterTestWithRandomData() //inregistrare pozitiva cu date Random generate cu ajutorul functiei din Utils  
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -71,7 +71,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
             rp.RegisterUser(Utils.GenerateRandomStringCount(10), Utils.GenerateRandomStringCount(12), Utils.GenerateRandomStringCount(8) + "@email.test", "telefon", Utils.GenerateRandomStringCount(6));
         }
 
-        [Test]
+        [Test, Order(8)]
         public void RegisterTestWithoutData()//inregistrare fara date - verificare mesaj eroare
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -106,7 +106,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
             }
         }
 
-        [Test, TestCaseSource("GetCredentialsDataCsvAlreadyExist")]
+        [Test, Order(9), TestCaseSource("GetCredentialsDataCsvAlreadyExist")]
         public void RegisterTestWithOlreadyRegisteredUser(string nume, string prenume, string email, string telefon, string parola) // inregistrare cu datele unui user deja existent - verificare mesaj eroare
         {
             testName = TestContext.CurrentContext.Test.Name;
