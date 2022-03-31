@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Argoli_Automation_Stefania.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +19,8 @@ namespace Argoli_Automation_Stefania.PageModels
         public void DeletProduct()
         {
             driver.FindElement(By.CssSelector(DeletButtonSelector)).Click();
-           
+            
+
         }
 
         public string TotalCost()

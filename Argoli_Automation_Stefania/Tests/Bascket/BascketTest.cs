@@ -38,10 +38,10 @@ namespace Argoli_Automation_Stefania.Tests.Bascket
             cp.AdaugaInCos();
             cp.MoveToBascket();
             Assert.AreEqual("Coșul dumneavoastră de cumpărături", cp.CheckBascketPageLabel());
-            //Thread.Sleep(3000);
             BascketPage bp = new BascketPage(_driver);
             Assert.AreEqual("Coșul dumneavoastră de cumpărături", cp.CheckBascketPageLabel());
             bp.DeletProduct();
+            cp.MoveToBascket();//worckarround pentru bug'ul de delet product from cart, the total cost is not refreshing
             Assert.AreEqual("Cost total: 0 LEI", bp.TotalCost());
 
         }
