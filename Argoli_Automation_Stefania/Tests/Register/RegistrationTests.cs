@@ -20,7 +20,7 @@ namespace Argoli_Automation_Stefania.Tests.Register
             }
         }
 
-        [Test, Order(2), TestCaseSource("GetCredentialsDataCsv1")]
+        [Test,TestCaseSource("GetCredentialsDataCsv1")] //inregistrare pozitiva cu date din CSV
         public void RegisterTest(string nume, string prenume, string email, string telefon, string parola)// (modifica csv -creaza cont nou)
         {
             testName = TestContext.CurrentContext.Test.Name;
@@ -46,8 +46,33 @@ namespace Argoli_Automation_Stefania.Tests.Register
 
         }
 
-        [Test, Order(4)]
-        public void RegisterTestWithoutData()
+        [Test]
+        public void RegisterTestWithRandomData() //inregistrare pozitiva cu date Random generate cu ajutorul functiei din Utils  
+        {
+            testName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(testName);
+            _driver.Navigate().GoToUrl(url);
+            MainPage mp = new MainPage(_driver);
+            mp.MoveToLoginPage();
+            LoginPage lp = new LoginPage(_driver);
+            lp.MoveToCreareCont();
+
+            RegistrationPage rp = new RegistrationPage(_driver);
+            Assert.AreEqual("Creează cont", rp.CreazaContLabel());
+            Assert.AreEqual("completează datele contului", rp.CompleteazaLabel());
+            Assert.AreEqual("Name:", rp.CheckNameLabel());
+            Assert.AreEqual("Prenume:", rp.CheckprenumeLabel());
+            Assert.AreEqual("Email:", rp.CheckemailLabel());
+            Assert.AreEqual("Telefon:", rp.ChecktelLabel());
+            Assert.AreEqual("Parola:", rp.CheckparolaLabel());
+            Assert.AreEqual("Confirmă parola:", rp.CheckconfirmaparolaLable());
+
+            rp.PushInregistrare();
+            rp.RegisterUser(Utils.GenerateRandomStringCount(10), Utils.GenerateRandomStringCount(12), Utils.GenerateRandomStringCount(8) + "@email.test", "telefon", Utils.GenerateRandomStringCount(6));
+        }
+
+        [Test]
+        public void RegisterTestWithoutData()//inregistrare fara date - verificare mesaj eroare
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -81,8 +106,8 @@ namespace Argoli_Automation_Stefania.Tests.Register
             }
         }
 
-        [Test, Order(5), TestCaseSource("GetCredentialsDataCsvAlreadyExist")]
-        public void RegisterTestWithOlreadyRegisteredUser(string nume, string prenume, string email, string telefon, string parola)
+        [Test, TestCaseSource("GetCredentialsDataCsvAlreadyExist")]
+        public void RegisterTestWithOlreadyRegisteredUser(string nume, string prenume, string email, string telefon, string parola) // inregistrare cu datele unui user deja existent - verificare mesaj eroare
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);

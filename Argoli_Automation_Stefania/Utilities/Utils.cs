@@ -290,7 +290,7 @@ namespace Argoli_Automation_Stefania.Utilities
             return dictionaryList;
         }
 
-        public static string GenerateRandomStringCount(int count)
+        public static string GenerateRandomStringCount(int count)//ii dam un numar de caractere si o sa ne genereze carctere ransom
         {
             const string chars = "abcdefghijklmnopqrstuvwxyz1234567890";
             StringBuilder sb = new StringBuilder();
