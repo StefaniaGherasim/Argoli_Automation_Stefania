@@ -19,6 +19,7 @@ namespace Argoli_Automation_Stefania.PageModels
         const string termenisiconditiiSelector = "//*[@id='loginForm']/span/a[1]";//xpath
         const string CookiePolicySelector = "//*[@id='loginForm']/span/a[2]";//xpath
         const string errorIdmsgSelector = "msg";//id
+        const string produseRecentAddSelector = "body > div:nth-child(6) > div > div > span";//css
 
 
 
@@ -49,6 +50,13 @@ namespace Argoli_Automation_Stefania.PageModels
         {
             return driver.FindElement(By.Id(errorIdmsgSelector)).Text;
         }
+
+        public string CheckProduseAdaugateLabel()
+        {
+
+            return driver.FindElement(By.CssSelector(produseRecentAddSelector)).Text;
+
+        }
         public void Login(string email, string password)
         {
             var emailInput = driver.FindElement(By.Id(emailSelector));
@@ -62,6 +70,20 @@ namespace Argoli_Automation_Stefania.PageModels
             var select = Utils.WaitForElementClickable(driver, 10, (By.Id(errorIdmsgSelector)));
             select.Click();
 
+        }
+
+        public void Login2(string email, string password)
+        {
+            var emailInput = driver.FindElement(By.Id(emailSelector));
+            emailInput.Clear();
+            emailInput.SendKeys(email);
+            var passwordInput = driver.FindElement(By.Id(passwordSelector));
+            passwordInput.Clear();
+            passwordInput.SendKeys(password);
+            var loginButton = driver.FindElement(By.CssSelector(loginButtonSelector));
+            loginButton.Submit();
+            var select = Utils.WaitForElementClickable(driver, 1000, (By.CssSelector(produseRecentAddSelector)));
+            select.Click();
         }
 
         public void MoveToCreareCont()

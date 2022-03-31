@@ -61,6 +61,7 @@ namespace Argoli_Automation_Stefania.Tests.Authentication
             mp.MoveToLoginPage();
 
             LoginPage lp = new LoginPage(_driver);
+            lp.Login2(email, password);
         }
         
 
